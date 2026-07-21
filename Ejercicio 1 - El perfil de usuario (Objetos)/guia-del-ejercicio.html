@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía del ejercicio 1 — Destructuración</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #5c5c6f;
+      --accent: #4361ee;
+      --code-bg: #1e1e2e;
+      --code-text: #cdd6f4;
+      --border: #e2e4ea;
+      --highlight: #eef1ff;
+      --success: #2d6a4f;
+      --success-bg: #d8f3dc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 0.85rem;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 0.85rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    blockquote {
+      background: var(--highlight);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--highlight);
+      font-weight: 600;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+    }
+
+    p code, li code, td code {
+      background: #e8eaf0;
+      color: #2d2d3a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .lang-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, #4361ee15, #7209b715);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .summary-box strong {
+      color: var(--accent);
+    }
+
+    .expected-output {
+      background: var(--success-bg);
+      border: 1px solid var(--success);
+      border-radius: 8px;
+      padding: 0.85rem 1.25rem;
+      margin: 1rem 0;
+      font-family: monospace;
+      color: var(--success);
+      font-weight: 600;
+    }
+
+    .hint-box {
+      background: #fff8e1;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+    }
+
+    .dont-box {
+      background: #fde8e8;
+      border-left: 4px solid #e63946;
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Guía del ejercicio 1</h1>
+      <p>Destructuración de objetos — El perfil de usuario</p>
+    </header>
+
+    <section>
+      <span class="lang-tag">Français</span>
+      <h2>Bonjour ! Voyons cet exercice ensemble</h2>
+      <p>Tu as déjà bien compris la théorie. Là, c'est <strong>la pratique</strong> : un petit exercice très concret.</p>
+    </section>
+
+    <section>
+      <h2>C'est quoi l'histoire de cet exercice ?</h2>
+      <p>On te donne la <strong>fiche d'un utilisateur</strong> nommé Carlos. C'est l'objet <code>usuario</code> :</p>
+
+      <pre><code>const usuario = {
+  nombre: "Carlos",
+  edad: 28,
+  pais: "España",
+  profesion: "Desarrollador"
+};</code></pre>
+
+      <p>C'est comme une <strong>carte d'identité numérique</strong> avec 4 infos :</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Étiquette (propriété)</th>
+            <th>Valeur</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><code>nombre</code></td><td>"Carlos"</td></tr>
+          <tr><td><code>edad</code></td><td>28</td></tr>
+          <tr><td><code>pais</code></td><td>"España"</td></tr>
+          <tr><td><code>profesion</code></td><td>"Desarrollador"</td></tr>
+        </tbody>
+      </table>
+
+      <p>Tout est <strong>dans la boîte</strong> <code>usuario</code>.</p>
+    </section>
+
+    <section>
+      <h2>Ce qu'on te demande de faire</h2>
+      <p>L'énoncé dit :</p>
+      <blockquote>
+        <em>Extrae las propiedades <strong>nombre</strong>, <strong>edad</strong> y <strong>pais</strong> en variables independientes usando una sola línea de código.</em>
+      </blockquote>
+      <p>En français :</p>
+      <blockquote>
+        <strong>Sors</strong> de l'objet <code>usuario</code> les infos <strong>nom</strong>, <strong>âge</strong> et <strong>pays</strong>, et mets-les dans <strong>3 variables séparées</strong>, en <strong>une seule ligne</strong>.
+      </blockquote>
+      <p>Tu ne touches <strong>pas</strong> à <code>profesion</code> pour cet exercice — on ne te demande que 3 choses sur 4.</p>
+    </section>
+
+    <section>
+      <h2>Le code de base de l'exercice</h2>
+      <pre><code>const usuario = {
+  nombre: "Carlos",
+  edad: 28,
+  pais: "España",
+  profesion: "Desarrollador"
+};
+
+// ESCRIBE TU DESTRUCTURACIÓN AQUÍ 👇
+
+
+console.log(nombre, edad, pais); // Debe mostrar por consola: Carlos 28 España</code></pre>
+    </section>
+
+    <section>
+      <h2>Pourquoi il y a une ligne vide avec un commentaire ?</h2>
+      <pre><code>// ESCRIBE TU DESTRUCTURACIÓN AQUÍ 👇</code></pre>
+      <p>C'est <strong>ton espace</strong> pour écrire <strong>ta</strong> solution. C'est là que tu mets la ligne de destructuration.</p>
+    </section>
+
+    <section>
+      <h2>Et cette ligne en bas ?</h2>
+      <pre><code>console.log(nombre, edad, pais);</code></pre>
+      <p>Ça veut dire : <em>« Affiche à l'écran les variables <code>nombre</code>, <code>edad</code> et <code>pais</code>. »</em></p>
+
+      <p>Le résultat attendu :</p>
+      <div class="expected-output">Carlos 28 España</div>
+
+      <p><strong>Problème pour l'instant :</strong> ces variables <code>nombre</code>, <code>edad</code> et <code>pais</code> <strong>n'existent pas encore</strong>. Elles ne sont pas créées tant que tu n'as pas écrit ta destructuration.</p>
+
+      <p>C'est comme si on te disait « écris le prénom sur le papier » alors que tu n'as pas encore sorti le prénom de la fiche.</p>
+    </section>
+
+    <section>
+      <h2>Ce que tu dois faire (en mots simples)</h2>
+      <ol>
+        <li>Regarder l'objet <code>usuario</code> — les données sont déjà là.</li>
+        <li>Écrire <strong>une ligne</strong> qui <strong>sort</strong> <code>nombre</code>, <code>edad</code> et <code>pais</code> de cet objet.</li>
+        <li>Créer 3 variables avec exactement ces noms : <code>nombre</code>, <code>edad</code>, <code>pais</code>.</li>
+        <li>Le <code>console.log</code> pourra alors les utiliser et afficher <strong>Carlos 28 España</strong>.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Analogie du prof</h2>
+      <p>Imagine une <strong>boîte à chaussures</strong> étiquetée <code>usuario</code>. Dedans :</p>
+      <ul>
+        <li>un papier « nom : Carlos »</li>
+        <li>un papier « âge : 28 »</li>
+        <li>un papier « pays : España »</li>
+        <li>un papier « métier : Desarrollador » (on ne le sort pas pour cet exercice)</li>
+      </ul>
+      <p>On te dit : <em>« Sors le nom, l'âge et le pays, mets chaque info dans une petite enveloppe, et fais-le en une seule phrase. »</em></p>
+      <p>La destructuration, c'est cette <strong>phrase magique</strong> qui ouvre la boîte et remplit les 3 enveloppes d'un coup.</p>
+    </section>
+
+    <section>
+      <h2>Ce qu'il ne faut pas faire ici</h2>
+      <div class="dont-box">
+        <ul>
+          <li><strong>Ne pas</strong> réécrire l'objet <code>usuario</code> — il est déjà là.</li>
+          <li><strong>Ne pas</strong> faire 3 lignes séparées (<code>const nombre = usuario.nombre</code> etc.) — l'énoncé demande <strong>une seule ligne</strong>.</li>
+          <li><strong>Ne pas</strong> oublier <code>pais</code> — le <code>console.log</code> en a besoin.</li>
+          <li><strong>Ne pas</strong> extraire <code>profesion</code> — ce n'est pas demandé (mais ce n'est pas grave si tu la mets en plus ; l'important c'est d'avoir les 3 autres).</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Indice (sans la réponse complète)</h2>
+      <p>Tu as appris que la forme générale ressemble à :</p>
+      <pre><code>const { ... } = usuario;</code></pre>
+      <div class="hint-box">
+        Entre les <code>{ }</code>, tu mets les <strong>noms des propriétés</strong> que tu veux sortir de la boîte : <code>nombre</code>, <code>edad</code> et <code>pais</code>.
+      </div>
+    </section>
+
+    <section>
+      <h2>Résumé</h2>
+      <div class="summary-box">
+        <strong>En une phrase :</strong><br>
+        Tu dois utiliser la destructuration pour créer les variables <code>nombre</code>, <code>edad</code> et <code>pais</code> à partir de l'objet <code>usuario</code>, en une ligne, pour que le <code>console.log</code> affiche : <strong>Carlos 28 España</strong>.
+      </div>
+    </section>
+
+    <footer>
+      Guía del ejercicio 1 — Curso JavaScript · Destructuración
+    </footer>
+  </div>
+</body>
+</html>

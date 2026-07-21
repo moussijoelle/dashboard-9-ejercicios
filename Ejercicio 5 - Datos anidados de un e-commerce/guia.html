@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía — Ejercicio 5: Datos anidados de un e-commerce</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      color: #1a1a1a;
+      background: #faf9f7;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      border-bottom: 2px solid #2c5282;
+      padding-bottom: 0.5rem;
+      color: #1a365d;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: #2d3748;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      background: #edf2f7;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: #1a202c;
+      color: #e2e8f0;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e0;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+
+    th {
+      background: #ebf4ff;
+      color: #1a365d;
+    }
+
+    tr:nth-child(even) {
+      background: #f7fafc;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 2rem 0;
+    }
+
+    .intro {
+      font-style: italic;
+      color: #4a5568;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ejercicio 5 : Datos anidados de un e-commerce</h1>
+
+  <p class="intro">Bonjour ! Pas de souci, on va y aller doucement, comme si on était en cours ensemble.</p>
+
+  <h2>De quoi parle cet exercice ?</h2>
+
+  <p>Imagine que tu travailles pour un <strong>site de vente en ligne</strong> (un e-commerce). Pour chaque client, l'ordinateur garde des <strong>informations</strong> : son nom, son adresse, etc.</p>
+
+  <p>En programmation, on range ces informations dans ce qu'on appelle un <strong>objet</strong>. Tu peux le voir comme un <strong>dossier</strong> ou un <strong>carton d'archives</strong> avec des étiquettes à l'intérieur.</p>
+
+  <hr>
+
+  <h2>Le dossier <code>cliente</code> (le client)</h2>
+
+  <p>Voici ce que contient le dossier de <strong>Laura</strong> :</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Étiquette</th>
+        <th>Contenu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>id</code></td>
+        <td><code>"CLI-992"</code> (son numéro client)</td>
+      </tr>
+      <tr>
+        <td><code>nombre</code></td>
+        <td><code>"Laura"</code> (son prénom)</td>
+      </tr>
+      <tr>
+        <td><code>direccion</code></td>
+        <td><strong>Un sous-dossier</strong> (son adresse)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Le sous-dossier <code>direccion</code> contient à son tour :</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Étiquette</th>
+        <th>Contenu</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>ciudad</code></td>
+        <td><code>"Barcelona"</code></td>
+      </tr>
+      <tr>
+        <td><code>codigoPostal</code></td>
+        <td><code>"08001"</code></td>
+      </tr>
+      <tr>
+        <td><code>pais</code></td>
+        <td><code>"España"</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>C'est ce qu'on appelle des <strong>données imbriquées</strong> : un dossier <strong>dans</strong> un autre dossier.</p>
+
+  <hr>
+
+  <h2>Ce qu'on te demande de faire</h2>
+
+  <p>L'exercice te dit :</p>
+
+  <blockquote>
+    <em>« Extrais le pays et la ville de l'adresse de ce client, ainsi que son nom, le tout en <strong>une seule ligne</strong> de destructuration. »</em>
+  </blockquote>
+
+  <p>En langage simple :</p>
+
+  <ol>
+    <li>Tu dois récupérer <strong>3 informations</strong> :
+      <ul>
+        <li>le <strong>nom</strong> → <code>Laura</code></li>
+        <li>la <strong>ville</strong> → <code>Barcelona</code></li>
+        <li>le <strong>pays</strong> → <code>España</code></li>
+      </ul>
+    </li>
+    <li>Tu dois le faire avec une technique appelée la <strong>déstructuration</strong>.</li>
+  </ol>
+
+  <hr>
+
+  <h2>C'est quoi, la « déstructuration » ?</h2>
+
+  <p>Sans entrer dans le jargon : c'est une façon de <strong>sortir des infos d'un dossier</strong> et de les mettre dans des <strong>boîtes séparées</strong>, en une seule phrase.</p>
+
+  <p><strong>Sans déstructuration</strong>, ce serait comme ouvrir le dossier, puis le sous-dossier, puis noter chaque info à la main :</p>
+
+  <pre><code>const nombre = cliente.nombre;
+const ciudad = cliente.direccion.ciudad;
+const pais = cliente.direccion.pais;</code></pre>
+
+  <p>Ça marche, mais l'exercice veut <strong>une seule ligne</strong> qui fait la même chose, plus vite et plus élégamment.</p>
+
+  <p><strong>Avec déstructuration</strong>, c'est comme dire d'un coup :</p>
+
+  <p><em>« Dans le dossier <code>cliente</code>, donne-moi le <code>nombre</code>, et dans le sous-dossier <code>direccion</code>, donne-moi la <code>ciudad</code> et le <code>pais</code>. »</em></p>
+
+  <hr>
+
+  <h2>Le résultat attendu</h2>
+
+  <p>À la fin, quand le programme affiche :</p>
+
+  <pre><code>console.log(nombre, ciudad, pais);</code></pre>
+
+  <p>Tu dois voir à l'écran :</p>
+
+  <pre><code>Laura Barcelona España</code></pre>
+
+  <p>Si tu vois ça, c'est que tu as bien « sorti » les 3 bonnes infos du dossier.</p>
+
+  <hr>
+
+  <h2>En résumé</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>Analogie simple</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Objet</strong></td>
+        <td>Un dossier avec des étiquettes</td>
+      </tr>
+      <tr>
+        <td><strong>Données imbriquées</strong></td>
+        <td>Un petit dossier à l'intérieur d'un grand</td>
+      </tr>
+      <tr>
+        <td><strong>Déstructuration</strong></td>
+        <td>Ouvrir le dossier et prendre ce qu'il faut en une seule action</td>
+      </tr>
+      <tr>
+        <td><strong>Ton objectif</strong></td>
+        <td>Créer 3 variables (<code>nombre</code>, <code>ciudad</code>, <code>pais</code>) en <strong>1 ligne</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>La ligne à écrire</h2>
+
+  <p>Tu peux la mettre là où il y a le commentaire <code>// ESCRIBE TU DESTRUCTURACIÓN AQUÍ</code> :</p>
+
+  <pre><code>const { nombre, direccion: { ciudad, pais } } = cliente;</code></pre>
+
+  <p><strong>Lecture en français :</strong><br>
+  « Depuis <code>cliente</code>, prends <code>nombre</code>. Depuis <code>direccion</code> (le sous-dossier), prends <code>ciudad</code> et <code>pais</code>. »</p>
+
+</body>
+</html>

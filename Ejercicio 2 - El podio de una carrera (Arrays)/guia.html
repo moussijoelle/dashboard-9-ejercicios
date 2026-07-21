@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía — El podio de una carrera (Arrays)</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #5c5c6f;
+      --accent: #4361ee;
+      --code-bg: #1e1e2e;
+      --code-text: #cdd6f4;
+      --border: #e2e4ea;
+      --highlight: #eef1ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 0.85rem;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 0.85rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    blockquote {
+      background: var(--highlight);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--highlight);
+      font-weight: 600;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+    }
+
+    p code, li code, td code {
+      background: #e8eaf0;
+      color: #2d2d3a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .lang-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, #4361ee15, #7209b715);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .summary-box strong {
+      color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Guía — El podio de una carrera</h1>
+      <p>Ejercicio 13.2 · Arrays y destructuración</p>
+    </header>
+
+  <!-- Partie en français -->
+  <section lang="fr">
+    <span class="lang-tag">Français</span>
+    <h2>Explication du prof (pour débutante)</h2>
+
+    <p>Bonjour !</p>
+    <p>Je vais t'expliquer cet exercice comme si on était en classe, sans supposer que tu connais déjà la programmation.</p>
+
+    <h3>De quoi parle l'exercice ?</h3>
+    <p>Imagine une <strong>course à pied</strong>. Plusieurs coureurs arrivent à la ligne d'arrivée, <strong>dans un ordre précis</strong> :</p>
+    <ol>
+      <li><strong>Ana</strong> arrive en premier</li>
+      <li><strong>Luis</strong> en deuxième</li>
+      <li><strong>María</strong> en troisième</li>
+      <li>Pedro en quatrième</li>
+      <li>Sofía en cinquième</li>
+    </ol>
+    <p>L'exercice te donne cette liste de noms, <strong>dans l'ordre d'arrivée</strong>, et te demande de récupérer <strong>seulement les trois premiers</strong> — le podium : or, argent et bronze.</p>
+
+    <h3>Qu'est-ce qu'un « array » (tableau) ?</h3>
+    <p>En programmation, un <strong>array</strong> (ou <strong>tableau</strong>) est comme une <strong>liste numérotée</strong>.</p>
+    <p>Pense à une étagère avec des cases :</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>0</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Nom</td>
+          <td>Ana</td>
+          <td>Luis</td>
+          <td>María</td>
+          <td>Pedro</td>
+          <td>Sofía</td>
+        </tr>
+      </tbody>
+    </table>
+    <ul>
+      <li>La <strong>première case</strong> (position 0) = <strong>1er</strong> = or</li>
+      <li>La <strong>deuxième</strong> (position 1) = <strong>2e</strong> = argent</li>
+      <li>La <strong>troisième</strong> (position 2) = <strong>3e</strong> = bronze</li>
+    </ul>
+    <p>Les cases 3 et 4 (Pedro, Sofía) ne font pas partie du podium pour cet exercice.</p>
+
+    <h3>Que doit faire ton code ?</h3>
+    <p>Tu pars de :</p>
+    <pre><code>const corredores = ["Ana", "Luis", "María", "Pedro", "Sofía"];</code></pre>
+    <p>Tu dois créer <strong>trois variables</strong> :</p>
+    <ul>
+      <li><code>oro</code> → le 1er (Ana)</li>
+      <li><code>plata</code> → le 2e (Luis)</li>
+      <li><code>bronce</code> → le 3e (María)</li>
+    </ul>
+    <p>À la fin, quand le programme affiche :</p>
+    <pre><code>console.log(oro, plata, bronce);</code></pre>
+    <p>la console doit montrer : <strong>Ana Luis María</strong>.</p>
+
+    <h3>La « destructuration » — en mots simples</h3>
+    <p>Le commentaire te dit d'écrire ta <strong>destructuration</strong> ici. C'est une façon élégante en JavaScript de dire :</p>
+    <blockquote>« Dans cette liste, prends le 1er élément pour <code>oro</code>, le 2e pour <code>plata</code>, le 3e pour <code>bronce</code>. »</blockquote>
+    <p>Au lieu d'écrire trois lignes du genre « oro = le premier », « plata = le deuxième », etc., tu <strong>déplies</strong> la liste en une seule ligne et tu donnes un nom à chaque morceau.</p>
+    <p><strong>Analogie :</strong> tu ouvres une boîte avec plusieurs objets et tu les poses sur la table en disant « celui-ci c'est l'or, celui-là l'argent, celui-là le bronze ».</p>
+
+    <div class="summary-box">
+      <p><strong>Résumé en une phrase :</strong> Tu as une liste ordonnée de coureurs ; tu dois extraire les trois premiers noms et les mettre dans trois variables nommées <code>oro</code>, <code>plata</code> et <code>bronce</code>, en utilisant la destructuration.</p>
+    </div>
+  </section>
+
+  <!-- Partie en español -->
+  <section lang="es">
+    <span class="lang-tag">Español</span>
+    <h2>La forma tradicional de escribirlo</h2>
+
+    <p>La forma <strong>tradicional</strong> (sin destructuración) es acceder a cada posición del array con su <strong>índice</strong>:</p>
+
+    <pre><code>const corredores = ["Ana", "Luis", "María", "Pedro", "Sofía"];
+
+const oro = corredores[0];
+const plata = corredores[1];
+const bronce = corredores[2];
+
+console.log(oro, plata, bronce); // Ana Luis María</code></pre>
+
+    <h3>Qué hace cada línea</h3>
+    <ul>
+      <li><code>corredores[0]</code> → primer elemento → <strong>Ana</strong> (oro)</li>
+      <li><code>corredores[1]</code> → segundo → <strong>Luis</strong> (plata)</li>
+      <li><code>corredores[2]</code> → tercero → <strong>María</strong> (bronce)</li>
+    </ul>
+    <p>Recuerda: en JavaScript los arrays empiezan en <strong>0</strong>, no en 1.</p>
+
+    <h3>Comparación con destructuración</h3>
+    <p><strong>Tradicional</strong> (3 líneas):</p>
+    <pre><code>const oro = corredores[0];
+const plata = corredores[1];
+const bronce = corredores[2];</code></pre>
+
+    <p><strong>Con destructuración</strong> (1 línea, lo que pide el ejercicio):</p>
+    <pre><code>const [oro, plata, bronce] = corredores;</code></pre>
+
+    <p>Hacen lo mismo: la destructuración es solo una forma más corta de escribir lo mismo.</p>
+
+    <div class="summary-box">
+      <p><strong>En resumen:</strong> ambas formas extraen Ana, Luis y María del array. La tradicional usa índices (<code>[0]</code>, <code>[1]</code>, <code>[2]</code>); la destructuración lo hace en una sola línea con corchetes a la izquierda del <code>=</code>.</p>
+    </div>
+  </section>
+
+    <footer>
+      Guía del ejercicio 13.2 — El podio de una carrera (Arrays)
+    </footer>
+  </div>
+</body>
+</html>

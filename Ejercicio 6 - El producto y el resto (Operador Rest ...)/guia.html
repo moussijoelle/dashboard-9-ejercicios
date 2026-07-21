@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide — Exercice 6 : Le produit et le reste</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      line-height: 1.7;
+      color: #1a1a2e;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 2rem 1rem;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      color: #16213e;
+      border-bottom: 3px solid #4a6cf7;
+      padding-bottom: 0.5rem;
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      color: #4a6cf7;
+      margin-top: 2rem;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+    }
+
+    code {
+      background: #eef1f8;
+      padding: 0.15em 0.45em;
+      border-radius: 4px;
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: #1e1e2e;
+      color: #cdd6f4;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    blockquote {
+      border-left: 4px solid #4a6cf7;
+      margin: 1.5rem 0;
+      padding: 0.75rem 1.25rem;
+      background: #f0f4ff;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    .comment {
+      color: #6c7086;
+    }
+
+    footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e0e4ef;
+      font-size: 0.9rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Explication du exercice (en français, niveau débutant)</h1>
+
+    <p>Bonjour ! Pas de souci, on va y aller doucement. 😊</p>
+
+    <h2>De quoi parle l'exercice ?</h2>
+
+    <p>Imagine une <strong>fiche produit</strong> dans une boutique en ligne, comme sur Amazon :</p>
+
+    <ul>
+      <li>un <strong>numéro</strong> (l'identifiant du produit)</li>
+      <li>un <strong>prix</strong></li>
+      <li>un <strong>nom</strong></li>
+      <li>une <strong>marque</strong></li>
+      <li>la <strong>quantité en stock</strong></li>
+    </ul>
+
+    <p>En programmation, on regroupe souvent ces infos dans une <strong>boîte</strong> qu'on appelle un <strong>objet</strong>. Ici, cette boîte s'appelle <code>producto</code> (produit).</p>
+
+    <pre><code>const producto = {
+  id: "PROD-10",
+  precio: 29.99,
+  nombre: "Teclado Mecánico",
+  marca: "Logitech",
+  stock: 15
+};</code></pre>
+
+    <p>Chaque ligne à l'intérieur des <code>{ }</code> est une <strong>propriété</strong> : un nom + une valeur.</p>
+
+    <h2>Ce qu'on te demande de faire</h2>
+
+    <p>Tu dois faire <strong>deux choses</strong> avec cette fiche :</p>
+
+    <h2>1. Sortir <code>id</code> et <code>precio</code> à part</h2>
+
+    <p>Tu dois les mettre dans <strong>deux variables séparées</strong>, comme si tu prenais deux infos importantes et tu les posais sur le bureau :</p>
+
+    <ul>
+      <li>une variable <code>id</code> → <code>"PROD-10"</code></li>
+      <li>une variable <code>precio</code> → <code>29.99</code></li>
+    </ul>
+
+    <h2>2. Mettre tout le reste dans un nouvel objet <code>detalles</code></h2>
+
+    <p>Les autres infos (<code>nombre</code>, <code>marca</code>, <code>stock</code>) ne doivent <strong>pas</strong> disparaître. On les regroupe dans un <strong>nouvel objet</strong> appelé <code>detalles</code> (détails).</p>
+
+    <p>Résultat attendu :</p>
+
+    <pre><code>detalles = {
+  nombre: "Teclado Mecánico",
+  marca: "Logitech",
+  stock: 15
+}</code></pre>
+
+    <h2>L'astuce : la déstructuration + l'opérateur « rest » (<code>...</code>)</h2>
+
+    <p>En JavaScript, au lieu d'écrire beaucoup de lignes à la main, on peut <strong>ouvrir la boîte</strong> et répartir le contenu en une seule ligne :</p>
+
+    <pre><code>const { id, precio, ...detalles } = producto;</code></pre>
+
+    <p>Lis cette ligne comme ceci :</p>
+
+    <ul>
+      <li><code>{ }</code> → « je vais prendre des choses dans l'objet »</li>
+      <li><code>id, precio</code> → « je veux ces deux-là, chacun dans sa propre variable »</li>
+      <li><code>...detalles</code> → « <strong>tout le reste</strong>, mets-le dans un objet appelé <code>detalles</code> »</li>
+    </ul>
+
+    <p>Le <code>...</code> s'appelle l'<strong>opérateur rest</strong> (reste). Ce n'est pas le même sens que le modulo <code>%</code> ; ici, « rest » veut dire <strong>« ce qui reste »</strong>.</p>
+
+    <h2>Pourquoi on fait ça ?</h2>
+
+    <p>C'est utile quand certaines infos sont <strong>plus importantes</strong> que d'autres.</p>
+
+    <p>Exemple concret :</p>
+
+    <ul>
+      <li><code>id</code> et <code>precio</code> → souvent affichés en gros (référence + prix)</li>
+      <li><code>nombre</code>, <code>marca</code>, <code>stock</code> → détails secondaires (description, marque, disponibilité)</li>
+    </ul>
+
+    <p>Tu <strong>sépares</strong> ce qui est prioritaire du reste, sans recopier tout à la main.</p>
+
+    <h2>Ce que tu dois voir à l'écran</h2>
+
+    <p>Quand tu lances le programme :</p>
+
+    <pre><code>console.log(id, precio);
+<span class="comment">// → PROD-10 29.99</span>
+
+console.log(detalles);
+<span class="comment">// → { nombre: 'Teclado Mecánico', marca: 'Logitech', stock: 15 }</span></code></pre>
+
+    <p>Si tu obtiens ça, c'est bon. ✅</p>
+
+    <h2>En une phrase</h2>
+
+    <blockquote>
+      Tu prends un objet produit, tu extrais <code>id</code> et <code>precio</code> dans deux variables, et tu mets toutes les autres propriétés dans un nouvel objet <code>detalles</code>, grâce à la déstructuration et à <code>...</code>.
+    </blockquote>
+
+    <footer>
+      Exercice 6 — El producto y el resto (Operador Rest)
+    </footer>
+  </main>
+</body>
+</html>

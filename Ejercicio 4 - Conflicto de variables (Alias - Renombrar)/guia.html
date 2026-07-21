@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía — Ejercicio 4: Conflicto de variables (Alias / Renombrar)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 3rem;
+      color: #1a1a1a;
+      background: #faf9f7;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      border-bottom: 2px solid #2c5282;
+      padding-bottom: 0.5rem;
+      color: #1a365d;
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      color: #2d3748;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      background: #edf2f7;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: #1a202c;
+      color: #e2e8f0;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 1rem;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e0;
+      padding: 0.6rem 0.8rem;
+      text-align: left;
+    }
+
+    th {
+      background: #ebf4ff;
+      color: #1a365d;
+    }
+
+    tr:nth-child(even) {
+      background: #f7fafc;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 2rem 0;
+    }
+
+    .intro {
+      font-style: italic;
+      color: #4a5568;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Ejercicio 4 : Conflicto de variables (Alias / Renombrar)</h1>
+
+  <p class="intro">Bonjour ! Je vais t'expliquer cet exercice simplement, comme si on était en cours ensemble.</p>
+
+  <h2>De quoi parle l'exercice ?</h2>
+
+  <p>Imagine que tu reçois des informations d'une <strong>API</strong> (un service externe qui envoie des données). Ce service parle <strong>anglais</strong> : il utilise les mots <code>title</code> et <code>salary</code>.</p>
+
+  <p>Toi, dans ton programme, tu préfères parler <strong>espagnol</strong> : tu veux utiliser <code>titulo</code> et <code>salario</code>.</p>
+
+  <p>L'exercice te demande de <strong>récupérer</strong> ces informations <strong>en changeant leur nom</strong> au passage.</p>
+
+  <hr>
+
+  <h2>Les éléments du code</h2>
+
+  <p>Tu as un objet <code>vacante</code> (une offre d'emploi) :</p>
+
+  <pre><code>const vacante = {
+  title: "Frontend Dev",
+  salary: 45000,
+  remote: true
+};</code></pre>
+
+  <p>C'est comme une <strong>fiche</strong> avec des cases :</p>
+  <ul>
+    <li><code>title</code> → le poste : "Frontend Dev"</li>
+    <li><code>salary</code> → le salaire : 45000</li>
+    <li><code>remote</code> → télétravail possible : oui (<code>true</code>)</li>
+  </ul>
+
+  <hr>
+
+  <h2>Ce qu'on te demande de faire</h2>
+
+  <p>À la ligne 7, il manque du code. Tu dois écrire une <strong>déstructuration</strong> (destructuring) : une façon en JavaScript de <strong>sortir</strong> des valeurs d'un objet et de les mettre dans des variables.</p>
+
+  <p>Mais attention : tu ne peux pas écrire simplement <code>title</code> et <code>salary</code>, parce que la ligne 9 utilise déjà :</p>
+
+  <pre><code>console.log(titulo, salario);</code></pre>
+
+  <p>Donc tu dois créer des variables qui s'appellent <strong><code>titulo</code></strong> et <strong><code>salario</code></strong>, même si dans l'objet elles s'appellent <code>title</code> et <code>salary</code>.</p>
+
+  <p>C'est ça le <strong>renommage</strong> (alias) :<br>
+  « Je prends <code>title</code>, mais dans mon code je l'appelle <code>titulo</code> ».</p>
+
+  <hr>
+
+  <h2>Analogie simple</h2>
+
+  <p>C'est comme si quelqu'un t'envoie un colis étiqueté <strong>"title"</strong> et <strong>"salary"</strong>, et toi tu colles dessus de nouvelles étiquettes <strong>"titulo"</strong> et <strong>"salario"</strong> pour que ton code comprenne.</p>
+
+  <p>Le contenu ne change pas :</p>
+  <ul>
+    <li><code>titulo</code> = "Frontend Dev"</li>
+    <li><code>salario</code> = 45000</li>
+  </ul>
+
+  <hr>
+
+  <h2>Le résultat attendu</h2>
+
+  <p>Quand le programme s'exécute, la console doit afficher :</p>
+
+  <pre><code>Frontend Dev 45000</code></pre>
+
+  <hr>
+
+  <h2>En résumé</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Concept</th>
+        <th>Explication</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Objet</strong></td>
+        <td>Une boîte avec plusieurs infos (<code>vacante</code>)</td>
+      </tr>
+      <tr>
+        <td><strong>Déstructuration</strong></td>
+        <td>Prendre une ou plusieurs infos de la boîte</td>
+      </tr>
+      <tr>
+        <td><strong>Alias / renommer</strong></td>
+        <td>Garder la valeur, mais changer le nom de la variable</td>
+      </tr>
+      <tr>
+        <td><strong>But</strong></td>
+        <td>Utiliser <code>titulo</code> et <code>salario</code> au lieu de <code>title</code> et <code>salary</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de usuario — Ejercicio 1</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100 flex items-center justify-center p-6">
+
+  <main class="w-full max-w-md">
+    <h1 class="text-center text-2xl font-bold text-slate-800 mb-6">
+      Perfil de usuario
+    </h1>
+
+    <article class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="h-24 bg-indigo-500"></div>
+
+      <div class="px-6 pb-6 -mt-12">
+        <div class="w-20 h-20 rounded-full bg-indigo-100 border-4 border-white flex items-center justify-center text-3xl font-bold text-indigo-600" id="inicial">
+          ?
+        </div>
+
+        <h2 class="mt-4 text-xl font-bold text-slate-800" id="nombre">—</h2>
+        <p class="text-slate-500 mt-1"><span id="edad">—</span> años</p>
+        <p class="text-slate-500" id="pais">—</p>
+
+        <div class="mt-4 pt-4 border-t border-slate-100">
+          <p class="text-sm text-slate-400">Profesión</p>
+          <p class="font-medium text-slate-700" id="profesion">—</p>
+        </div>
+      </div>
+    </article>
+
+    <p class="text-center text-sm text-slate-400 mt-4">
+      Abre la consola (F12) para ver el resultado del ejercicio
+    </p>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

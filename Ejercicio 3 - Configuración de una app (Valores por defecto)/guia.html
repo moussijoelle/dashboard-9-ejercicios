@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía — Ejercicio 3 : Configuration d'une app</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+      color: #1a1a1a;
+      background: #faf9f7;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      border-bottom: 3px solid #2c5282;
+      padding-bottom: 0.5rem;
+      color: #1a365d;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      margin-top: 2.5rem;
+      color: #2c5282;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      color: #4a5568;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+    }
+
+    .intro {
+      background: #ebf4ff;
+      border-left: 4px solid #2c5282;
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      background: #edf2f7;
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: #1a202c;
+      color: #e2e8f0;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+    }
+
+    th, td {
+      border: 1px solid #cbd5e0;
+      padding: 0.6rem 0.9rem;
+      text-align: left;
+    }
+
+    th {
+      background: #edf2f7;
+      font-weight: 600;
+    }
+
+    .diagram {
+      background: #fff;
+      border: 1px solid #cbd5e0;
+      padding: 1.25rem;
+      border-radius: 8px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .solution {
+      background: #f0fff4;
+      border: 2px solid #38a169;
+      padding: 1.25rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+
+    .solution strong {
+      color: #276749;
+    }
+
+    .summary {
+      background: #fffff0;
+      border-left: 4px solid #d69e2e;
+      padding: 1rem 1.25rem;
+      margin: 2rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    ul {
+      padding-left: 1.4rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 2.5rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Guía — Ejercicio 3 : Configuration d'une app (Valeurs par défaut)</h1>
+
+  <div class="intro">
+    <p>Bonjour ! Cette page reprend toutes les explications sur l'exercice, écrites en <strong>français simple</strong>, comme si tu étais en classe et que tu découvrais la programmation pour la première fois.</p>
+  </div>
+
+  <h2>1. De quoi parle l'exercice ?</h2>
+
+  <p>Imagine une <strong>application</strong> (comme une appli sur ton téléphone) avec des <strong>réglages</strong> :</p>
+  <ul>
+    <li>le <strong>thème</strong> : clair ou sombre ;</li>
+    <li>la <strong>langue</strong> : espagnol, français, anglais…</li>
+  </ul>
+
+  <p>Ces réglages sont stockés dans un <strong>objet</strong> en JavaScript. Un objet, c'est comme une <strong>petite boîte avec des étiquettes</strong> :</p>
+
+  <pre><code>const config = {
+  tema: "oscuro"
+  // El idioma no viene aquí
+};</code></pre>
+
+  <p>Ici, la boîte contient :</p>
+  <ul>
+    <li><code>tema</code> → <code>"oscuro"</code> (thème sombre)</li>
+    <li><code>idioma</code> → <strong>rien</strong> (la langue n'est pas indiquée)</li>
+  </ul>
+
+  <hr>
+
+  <h2>2. C'est quoi une « configuration » ?</h2>
+
+  <p>Quand tu ouvres une appli sur ton téléphone, tu peux parfois choisir le thème et la langue. Toutes ces préférences, c'est ce qu'on appelle la <strong>configuration</strong> de l'appli.</p>
+
+  <p>Dans l'exercice, cette configuration est représentée par un objet nommé <code>config</code>.</p>
+
+  <hr>
+
+  <h2>3. C'est quoi un « objet » en programmation ?</h2>
+
+  <p>Un objet, c'est comme un <strong>carnet de réglages</strong> avec des <strong>étiquettes</strong> et des <strong>valeurs</strong>.</p>
+
+  <pre><code>const config = {
+  tema: "oscuro"
+};</code></pre>
+
+  <p>Lis-le comme ça :</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Étiquette (nom)</th>
+        <th>Valeur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>tema</code></td>
+        <td><code>"oscuro"</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li><code>tema</code> = le nom du réglage (le thème)</li>
+    <li><code>"oscuro"</code> = la valeur choisie (sombre, en espagnol)</li>
+    <li>Les guillemets <code>"..."</code> indiquent que c'est du <strong>texte</strong> (une chaîne de caractères)</li>
+  </ul>
+
+  <p><strong>Important :</strong> dans cet objet, il n'y a <strong>pas</strong> de ligne pour <code>idioma</code> (la langue). Donc la langue <strong>n'est pas définie</strong>.</p>
+
+  <hr>
+
+  <h2>4. Ce qu'on te demande</h2>
+
+  <p>L'énoncé dit :</p>
+  <blockquote>
+    <p>Extrais <code>tema</code> et <code>idioma</code>. Si <code>idioma</code> n'existe pas, utilise la valeur par défaut <code>"es"</code>.</p>
+  </blockquote>
+
+  <p>En langage humain :</p>
+  <ol>
+    <li>Récupère le thème → on sait que c'est <code>"oscuro"</code>.</li>
+    <li>Récupère la langue → <strong>elle n'est pas dans l'objet</strong>, donc mets <code>"es"</code> (espagnol) par défaut.</li>
+  </ol>
+
+  <p>C'est comme si tu demandais à quelqu'un : <em>« Quelle langue as-tu choisie ? »</em> et qu'il ne répond pas. L'appli décide alors : <em>« OK, je mets espagnol par défaut. »</em></p>
+
+  <p>En une phrase :</p>
+  <div class="summary">
+    <p>Tu extrais <code>tema</code> et <code>idioma</code> de l'objet <code>config</code>, et si <code>idioma</code> manque, tu utilises <code>"es"</code> automatiquement.</p>
+  </div>
+
+  <hr>
+
+  <h2>5. Pourquoi on ne peut pas juste « lire » idioma ?</h2>
+
+  <p>Si tu faisais ça naïvement :</p>
+
+  <pre><code>const idioma = config.idioma;</code></pre>
+
+  <p>JavaScript te dirait en gros : <em>« Il n'y a rien ici »</em>. Techniquement, la valeur serait <code>undefined</code> (non définie).</p>
+
+  <p>Et si tu affiches :</p>
+
+  <pre><code>console.log(tema, idioma);</code></pre>
+
+  <p>tu obtiendrais :</p>
+
+  <pre><code>oscuro undefined</code></pre>
+
+  <p>… ce qui <strong>n'est pas</strong> ce que l'exercice veut. Il faut <strong><code>oscuro es</code></strong>.</p>
+
+  <p>D'où l'idée des <strong>valeurs par défaut</strong> : quand une info manque, on met une valeur de secours.</p>
+
+  <hr>
+
+  <h2>6. C'est quoi une « variable » ?</h2>
+
+  <p>Une <strong>variable</strong>, c'est une <strong>boîte avec un nom</strong> où tu ranges une valeur pour t'en servir plus tard.</p>
+
+  <p>Exemples :</p>
+  <ul>
+    <li>une boîte nommée <code>tema</code> → contient <code>"oscuro"</code></li>
+    <li>une boîte nommée <code>idioma</code> → doit contenir <code>"es"</code></li>
+  </ul>
+
+  <p>À la fin, le code fait :</p>
+
+  <pre><code>console.log(tema, idioma);</code></pre>
+
+  <p><code>console.log</code> = <strong>afficher à l'écran</strong> (dans la console du navigateur ou de l'éditeur). C'est comme un <code>print</code> pour vérifier que tout est bon.</p>
+
+  <hr>
+
+  <h2>7. La méthode « classique » (sans déstructuration)</h2>
+
+  <p>Sans la technique demandée, tu pourrais écrire :</p>
+
+  <pre><code>const tema = config.tema;
+let idioma = config.idioma;
+
+if (idioma === undefined) {
+  idioma = "es";
+}</code></pre>
+
+  <p>Ça marche, mais c'est <strong>long</strong>. L'exercice te demande d'utiliser la <strong>déstructuration</strong>, une façon plus courte et moderne en JavaScript.</p>
+
+  <hr>
+
+  <h2>8. C'est quoi la « déstructuration » ?</h2>
+
+  <p><strong>Déstructurer</strong> = <strong>ouvrir</strong> l'objet et <strong>sortir</strong> directement ce dont tu as besoin, en une seule ligne.</p>
+
+  <p>Analogie : tu as un <strong>sac</strong> (<code>config</code>) avec des choses dedans. Au lieu de fouiller une par une, tu dis : <em>« Je sors <code>tema</code> et <code>idioma</code> du sac. »</em></p>
+
+  <p>En JavaScript, au lieu d'écrire :</p>
+
+  <pre><code>const tema = config.tema;
+const idioma = config.idioma; // undefined, car absent</code></pre>
+
+  <p>on peut <strong>déstructurer</strong> l'objet en une seule ligne et dire : <em>« Si <code>idioma</code> n'existe pas, mets <code>"es"</code> »</em>.</p>
+
+  <p>C'est exactement ce que le commentaire te demande :</p>
+
+  <pre><code>// ESCRIBE TU DESTRUCTURACIÓN AQUÍ 👇</code></pre>
+
+  <hr>
+
+  <h2>9. La solution — mot par mot</h2>
+
+  <div class="solution">
+    <p><strong>La ligne à écrire :</strong></p>
+    <pre><code>const { tema, idioma = "es" } = config;</code></pre>
+  </div>
+
+  <h3><code>const</code></h3>
+  <p>→ « Je crée des variables que je ne changerai pas après. »</p>
+
+  <h3><code>{ tema, idioma = "es" }</code></h3>
+  <p>→ « Dans l'objet, je cherche :</p>
+  <ul>
+    <li>une propriété <code>tema</code> → je la mets dans une variable <code>tema</code></li>
+    <li>une propriété <code>idioma</code> → si elle n'existe pas, je mets <code>"es"</code> »</li>
+  </ul>
+  <p>La partie <code>idioma = "es"</code> est la <strong>valeur par défaut</strong>.</p>
+
+  <h3><code>= config</code></h3>
+  <p>→ « …et tout ça, je le prends depuis l'objet <code>config</code>. »</p>
+
+  <hr>
+
+  <h2>10. Que se passe-t-il ligne par ligne ?</h2>
+
+  <p><strong>Étape 1 — L'objet existe :</strong></p>
+  <pre><code>config = { tema: "oscuro" }</code></pre>
+
+  <p><strong>Étape 2 — Déstructuration :</strong></p>
+  <pre><code>const { tema, idioma = "es" } = config;</code></pre>
+
+  <ul>
+    <li>JavaScript cherche <code>config.tema</code> → trouve <code>"oscuro"</code> → <code>tema = "oscuro"</code></li>
+    <li>JavaScript cherche <code>config.idioma</code> → <strong>ne trouve rien</strong> → applique le défaut → <code>idioma = "es"</code></li>
+  </ul>
+
+  <p><strong>Étape 3 — Affichage :</strong></p>
+  <pre><code>console.log(tema, idioma);</code></pre>
+
+  <p>Résultat attendu : <strong><code>oscuro es</code></strong> ✓</p>
+
+  <ul>
+    <li><code>oscuro</code> → vient de l'objet</li>
+    <li><code>es</code> → valeur par défaut, car <code>idioma</code> n'était pas dans <code>config</code></li>
+  </ul>
+
+  <hr>
+
+  <h2>11. Schéma visuel</h2>
+
+  <div class="diagram">┌─────────────────────────┐
+│      config             │
+│  ┌─────────────────┐    │
+│  │ tema: "oscuro"  │───►│──► variable tema = "oscuro"
+│  └─────────────────┘    │
+│  ┌─────────────────┐    │
+│  │ idioma: ???     │    │    (absent)
+│  └─────────────────┘    │
+└─────────────────────────┘
+              │
+              └──► valeur par défaut ──► variable idioma = "es"</div>
+
+  <hr>
+
+  <h2>12. Autre exemple pour bien comprendre</h2>
+
+  <p>Si l'objet était complet :</p>
+
+  <pre><code>const config = {
+  tema: "claro",
+  idioma: "fr"
+};
+
+const { tema, idioma = "es" } = config;
+
+console.log(tema, idioma); // claro fr</code></pre>
+
+  <p>Ici, <code>idioma</code> <strong>existe</strong> (<code>"fr"</code>), donc la valeur par défaut <code>"es"</code> <strong>n'est pas utilisée</strong>.</p>
+
+  <p><strong>Règle à retenir :</strong> la valeur par défaut ne s'applique <strong>que</strong> quand la propriété est <strong>absente</strong> ou vaut <code>undefined</code>.</p>
+
+  <hr>
+
+  <h2>13. Vocabulaire à retenir</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Mot</th>
+        <th>Signification simple</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Objet</strong></td>
+        <td>Un groupe de réglages (étiquette → valeur)</td>
+      </tr>
+      <tr>
+        <td><strong>Propriété</strong></td>
+        <td>Une étiquette dans l'objet (<code>tema</code>, <code>idioma</code>)</td>
+      </tr>
+      <tr>
+        <td><strong>Variable</strong></td>
+        <td>Une boîte nommée pour stocker une valeur</td>
+      </tr>
+      <tr>
+        <td><strong>Valeur par défaut</strong></td>
+        <td>Valeur de secours si l'info manque</td>
+      </tr>
+      <tr>
+        <td><strong>Déstructuration</strong></td>
+        <td>Extraire plusieurs valeurs d'un objet en une ligne</td>
+      </tr>
+      <tr>
+        <td><strong>console.log</strong></td>
+        <td>Afficher des valeurs pour vérifier</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>14. Résumé en 3 phrases</h2>
+
+  <div class="summary">
+    <ol>
+      <li>Tu as un objet <code>config</code> avec le thème, mais <strong>sans</strong> la langue.</li>
+      <li>Tu dois créer deux variables : <code>tema</code> et <code>idioma</code>.</li>
+      <li>Si <code>idioma</code> n'est pas dans l'objet, tu mets <code>"es"</code> grâce à la déstructuration.</li>
+    </ol>
+  </div>
+
+  <div class="solution">
+    <p><strong>Solution complète de l' exercice :</strong></p>
+    <pre><code>const config = {
+  tema: "oscuro"
+  // El idioma no viene aquí
+};
+
+const { tema, idioma = "es" } = config;
+
+console.log(tema, idioma); // oscuro es</code></pre>
+  </div>
+
+</body>
+</html>

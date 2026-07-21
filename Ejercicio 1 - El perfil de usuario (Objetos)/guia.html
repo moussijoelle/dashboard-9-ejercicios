@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guía — Destructuración en JavaScript</title>
+  <style>
+    :root {
+      --bg: #f8f9fa;
+      --card: #ffffff;
+      --text: #1a1a2e;
+      --muted: #5c5c6f;
+      --accent: #4361ee;
+      --code-bg: #1e1e2e;
+      --code-text: #cdd6f4;
+      --border: #e2e4ea;
+      --highlight: #eef1ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      padding: 2rem 1rem 4rem;
+    }
+
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    section h2 {
+      font-size: 1.35rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      margin: 1.25rem 0 0.75rem;
+    }
+
+    p {
+      margin-bottom: 0.85rem;
+    }
+
+    ul, ol {
+      margin: 0.75rem 0 0.85rem 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    blockquote {
+      background: var(--highlight);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.85rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--highlight);
+      font-weight: 600;
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: "Cascadia Code", "Fira Code", Consolas, monospace;
+    }
+
+    p code, li code, td code {
+      background: #e8eaf0;
+      color: #2d2d3a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .lang-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .summary-box {
+      background: linear-gradient(135deg, #4361ee15, #7209b715);
+      border: 1px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .summary-box strong {
+      color: var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Guía — Destructuración en JavaScript</h1>
+      <p>Ejercicio 13.1 · El perfil de usuario (Objetos)</p>
+    </header>
+
+    <!-- SECCIÓN EN FRANCÉS -->
+    <section>
+      <span class="lang-tag">Français</span>
+      <h2>Introduction — Qu'est-ce que la destructuration ?</h2>
+
+      <p>La <strong>destructuration</strong> est une fonctionnalité de JavaScript (ES6) qui permet d'extraire des données d'un objet ou d'un tableau et de les mettre directement dans des variables, en une seule ligne.</p>
+
+      <h3>D'abord : c'est quoi un objet ?</h3>
+      <p>Imagine une <strong>fiche d'identité</strong> (un profil utilisateur) :</p>
+      <pre><code>const usuario = {
+  nombre: "Ana",
+  edad: 28,
+  pais: "España",
+  profesion: "Desarrolladora"
+};</code></pre>
+      <p>Pour lire une info, on écrit par exemple <code>usuario.nombre</code> → ça donne <code>"Ana"</code>.</p>
+
+      <h3>La destructuration, c'est quoi ?</h3>
+      <p><strong>Destructurer</strong> = <strong>déballer</strong> la boîte et mettre chaque chose directement dans un petit pot à part, <strong>en une seule ligne</strong>.</p>
+
+      <p><strong>Sans destructuration (la méthode longue) :</strong></p>
+      <pre><code>let nombre = usuario.nombre;
+let edad = usuario.edad;</code></pre>
+
+      <p><strong>Avec destructuration (la méthode courte) :</strong></p>
+      <pre><code>const { nombre, edad } = usuario;</code></pre>
+
+      <blockquote>Analogie : au lieu de chercher dans le placard à chaque fois (<code>usuario.nombre</code>, <code>usuario.edad</code>…), tu sors tout ce dont tu as besoin une fois et tu l'as sous la main.</blockquote>
+
+      <h3>1. Destructuration des tableaux (arrays)</h3>
+      <p>Un <strong>tableau</strong> = une <strong>liste ordonnée</strong> : 1er élément, 2e élément, 3e…</p>
+
+      <p><strong>Sans destructuration :</strong></p>
+      <pre><code>let resultado = cookie.split('=');
+let llave = resultado[0];   // "usuario"
+let valor = resultado[1];     // "Carlos"</code></pre>
+
+      <p><strong>Avec destructuration :</strong></p>
+      <pre><code>const [llave, valor] = cookie.split('=');</code></pre>
+
+      <p>Les <strong>crochets <code>[]</code></strong> = « le 1er va dans <code>llave</code>, le 2e dans <code>valor</code> ».</p>
+
+      <ul>
+        <li><strong>Ignorer un élément :</strong> <code>const [, valor] = cookie.split('=');</code></li>
+        <li><strong>Valeur par défaut :</strong> <code>const [llave, valor = "sin-valor"] = cookie.split('=');</code></li>
+      </ul>
+
+      <h3>2. Destructuration des objets</h3>
+      <p>On utilise des <strong>accolades <code>{}</code></strong>, pas des crochets.</p>
+      <pre><code>const { nombre, edad } = usuario;</code></pre>
+
+      <p><strong>Renommer une variable :</strong></p>
+      <pre><code>const { profesion: trabajo } = usuario;
+console.log(trabajo);    // "Desarrolladora"
+console.log(profesion);  // ❌ Error: profesion n'existe pas comme variable</code></pre>
+
+      <h3>3. Destructuration dans les paramètres d'une fonction</h3>
+      <pre><code>function saludar({ nombre, edad }) {
+  console.log(`Hola, me llamo ${nombre} y tengo ${edad} años.`);
+}
+
+const persona = { nombre: "Lucas", edad: 22, ciudad: "Madrid" };
+saludar(persona);</code></pre>
+      <p>C'est très utilisé en <strong>React</strong> pour les <em>props</em>.</p>
+
+      <h3>4. Destructuration imbriquée</h3>
+      <pre><code>const auto = {
+  marca: "Toyota",
+  motor: {
+    cilindrada: "2.0L",
+    caballos: 150
+  }
+};
+
+const { motor: { caballos } } = auto;
+console.log(caballos);  // 150</code></pre>
+
+      <h3>5. L'opérateur rest (<code>...</code>)</h3>
+      <pre><code>const configuracion = {
+  id: "98A",
+  tema: "oscuro",
+  idioma: "es",
+  notificaciones: true
+};
+
+const { id, ...ajustesVisuales } = configuracion;
+// id → "98A"
+// ajustesVisuales → { tema: "oscuro", idioma: "es", notificaciones: true }</code></pre>
+
+      <h3>En quoi consiste l'exercice ?</h3>
+      <ol>
+        <li><strong>Créer</strong> un objet qui représente une personne.</li>
+        <li><strong>Utiliser la destructuration</strong> pour en extraire des infos.</li>
+        <li><strong>Passer cet objet à une fonction</strong> qui déstructure ses paramètres.</li>
+        <li>Peut-être <strong>renommer</strong> une propriété, ou utiliser <code>...rest</code>.</li>
+      </ol>
+
+      <div class="summary-box">
+        <strong>Résumé :</strong> La destructuration, c'est une façon élégante de sortir des données d'un objet ou d'un tableau et de les mettre dans des variables directement, sans répéter <code>.nombre</code>, <code>.edad</code>, <code>[0]</code>, <code>[1]</code> à chaque fois.
+      </div>
+
+      <h3>Aide-mémoire</h3>
+      <table>
+        <thead>
+          <tr><th>Situation</th><th>Syntaxe</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tableau</td><td><code>const [a, b] = monTableau</code></td></tr>
+          <tr><td>Objet</td><td><code>const { nom, age } = monObjet</code></td></tr>
+          <tr><td>Renommer</td><td><code>const { nom: prenom } = monObjet</code></td></tr>
+          <tr><td>Dans une fonction</td><td><code>function f({ nom, age }) { }</code></td></tr>
+          <tr><td>Objet imbriqué</td><td><code>const { motor: { caballos } } = auto</code></td></tr>
+          <tr><td>Garder le reste</td><td><code>const { id, ...reste } = config</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECCIÓN: LÍNEA POR LÍNEA -->
+    <section>
+      <span class="lang-tag">Español</span>
+      <h2>Explicación línea por línea</h2>
+
+      <pre><code>const { nombre, edad } = usuario;</code></pre>
+
+      <p>Imagina que <code>usuario</code> es una caja con etiquetas. Esta línea <strong>abre la caja</strong> y saca dos cosas con nombres concretos.</p>
+
+      <table>
+        <thead>
+          <tr><th>Elemento</th><th>Significado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>const</code></td><td>Declara una <strong>constante</strong>: una variable que no se puede reasignar después.</td></tr>
+          <tr><td><code>{ nombre, edad }</code></td><td>Sintaxis de <strong>destructuración</strong>. Busca las propiedades <code>nombre</code> y <code>edad</code> y crea variables con esos nombres.</td></tr>
+          <tr><td><code>=</code></td><td>Operador de asignación: toma los datos de la derecha y los asigna a la izquierda.</td></tr>
+          <tr><td><code>usuario</code></td><td>El <strong>objeto de origen</strong> del que sacas los datos.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>¿Qué pasa al ejecutar la línea?</h3>
+      <table>
+        <thead>
+          <tr><th>Paso</th><th>Qué ocurre</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>JavaScript mira <code>usuario</code></td></tr>
+          <tr><td>2</td><td>Busca la propiedad <code>nombre</code> → <code>"Ana"</code></td></tr>
+          <tr><td>3</td><td>Crea <code>const nombre = "Ana"</code></td></tr>
+          <tr><td>4</td><td>Busca la propiedad <code>edad</code> → <code>28</code></td></tr>
+          <tr><td>5</td><td>Crea <code>const edad = 28</code></td></tr>
+        </tbody>
+      </table>
+
+      <h3>Esquema visual</h3>
+      <pre><code>const   {   nombre ,   edad   }   =   usuario ;
+  │       │     │        │      │       │
+  │       │     │        │      │       └── Objeto del que sacas datos
+  │       │     │        │      └── Asignación
+  │       │     │        └── Segunda propiedad → variable edad
+  │       │     └── Primera propiedad → variable nombre
+  │       └── Sintaxis de destructuración (no es un objeto nuevo)
+  └── Declara constantes</code></pre>
+
+      <p><strong>Detalle importante:</strong> Si una propiedad no existe en el objeto, la variable vale <code>undefined</code> (no da error por sí solo).</p>
+    </section>
+
+    <!-- SECCIÓN: nombre, edad y profesion: trabajo -->
+    <section>
+      <h2>¿<code>nombre</code> y <code>edad</code> son datos del usuario?</h2>
+
+      <p>Sí. Viven <strong>dentro</strong> del objeto <code>usuario</code> como propiedades:</p>
+      <pre><code>const usuario = {
+  nombre: "Ana",
+  edad: 28,
+  pais: "España",
+  profesion: "Desarrolladora"
+};</code></pre>
+
+      <p>La destructuración <strong>no inventa</strong> esos datos: los <strong>saca</strong> del objeto y los pone en variables sueltas para usarlos más fácil.</p>
+
+      <blockquote>La destructuración sirve para <strong>extraer varios valores de un objeto (o array) y declarar varias variables a la vez</strong>.</blockquote>
+
+      <pre><code>const { nombre, edad } = usuario;</code></pre>
+      <p>Es lo mismo que:</p>
+      <pre><code>const nombre = usuario.nombre;
+const edad = usuario.edad;</code></pre>
+
+      <h3>Ejemplo con <code>profesion</code> y <code>trabajo</code></h3>
+      <p>A veces la propiedad del objeto tiene un nombre, pero tú quieres <strong>otro nombre</strong> para la variable. Ahí usas <code>:</code>.</p>
+
+      <pre><code>const { profesion: trabajo } = usuario;
+
+console.log(trabajo);            // "Desarrolladora" ✅
+console.log(profesion);          // ❌ Error: profesion no existe como variable
+console.log(usuario.profesion);  // "Desarrolladora" ✅ (sigue en el objeto)</code></pre>
+
+      <table>
+        <thead>
+          <tr><th>Elemento</th><th>Significado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>profesion</code></td><td>Nombre de la <strong>propiedad</strong> dentro de <code>usuario</code></td></tr>
+          <tr><td><code>:</code></td><td>"Voy a llamar a esto de otra forma"</td></tr>
+          <tr><td><code>trabajo</code></td><td>Nombre de la <strong>variable</strong> que se crea</td></tr>
+        </tbody>
+      </table>
+
+      <p>Equivale a:</p>
+      <pre><code>const trabajo = usuario.profesion;</code></pre>
+
+      <h3>Comparación rápida</h3>
+      <pre><code>// Mismo nombre en objeto y variable
+const { nombre } = usuario;
+// nombre = usuario.nombre
+
+// Nombre distinto en la variable
+const { profesion: trabajo } = usuario;
+// trabajo = usuario.profesion</code></pre>
+    </section>
+
+    <!-- SECCIÓN: Tradicional vs destructuración -->
+    <section>
+      <h2>Forma tradicional vs destructuración — ¿Es lo mismo?</h2>
+
+      <p><strong>Sí.</strong> Las dos formas hacen <strong>exactamente lo mismo</strong>:</p>
+
+      <h3>Forma tradicional (larga)</h3>
+      <pre><code>const nombre = usuario.nombre;
+const edad = usuario.edad;</code></pre>
+      <p>Aquí <strong>sacas</strong> <code>nombre</code> y <code>edad</code> de <code>usuario</code> y los guardas en variables.</p>
+
+      <h3>Forma con destructuración (corta)</h3>
+      <pre><code>const { nombre, edad } = usuario;</code></pre>
+      <p>Aquí <strong>también sacas</strong> <code>nombre</code> y <code>edad</code> de <code>usuario</code>. Solo que JavaScript lo hace en una línea.</p>
+
+      <table>
+        <thead>
+          <tr><th></th><th>Tradicional</th><th>Destructuración</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>¿De dónde sale el dato?</td><td>De <code>usuario</code></td><td>De <code>usuario</code></td></tr>
+          <tr><td>¿Qué obtienes?</td><td>Variables <code>nombre</code>, <code>edad</code></td><td>Variables <code>nombre</code>, <code>edad</code></td></tr>
+          <tr><td>¿El objeto cambia?</td><td>No</td><td>No</td></tr>
+          <tr><td>Diferencia</td><td>Más líneas, más repetición (<code>usuario.</code>)</td><td>Menos líneas</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Ejemplo paso a paso (como en un ejercicio)</h3>
+      <pre><code>const usuario = {
+  nombre: "Ana",
+  edad: 28,
+  profesion: "Desarrolladora"
+};
+
+// PASO 1 — Forma tradicional (para entender)
+const nombreTradicional = usuario.nombre;
+const edadTradicional = usuario.edad;
+
+console.log(nombreTradicional);  // Ana
+console.log(edadTradicional);    // 28
+
+// PASO 2 — Forma con destructuración (el atajo)
+const { nombre, edad } = usuario;
+
+console.log(nombre);  // Ana (mismo resultado)
+console.log(edad);    // 28 (mismo resultado)</code></pre>
+
+      <h3>Analogía simple</h3>
+      <p><code>usuario</code> es una <strong>mochila</strong> con bolsillos: <code>nombre</code>, <code>edad</code>, <code>profesion</code>.</p>
+      <ul>
+        <li><strong>Tradicional:</strong> abres el bolsillo <code>nombre</code> y pones lo que hay en una cajita. Repites con <code>edad</code>.</li>
+        <li><strong>Destructuración:</strong> dices "sácame <code>nombre</code> y <code>edad</code> de la mochila" — todo en una frase.</li>
+      </ul>
+      <p>La mochila (<code>usuario</code>) sigue intacta. Solo copiaste valores a variables.</p>
+
+      <blockquote>
+        <strong>Lo que quizá te liaba:</strong> Pensabas "primero saco los datos… y después declaro variables con destructuración".<br><br>
+        En realidad: <strong>Declarar variables ES sacar los datos.</strong> Destructuración es otra sintaxis para hacerlo.<br><br>
+        No hace falta hacer las dos cosas en un programa real: <strong>eliges una</strong>. En el curso a veces piden ambas solo para comparar.
+      </blockquote>
+
+      <h3>Cuándo usar cada una</h3>
+      <ul>
+        <li><strong>Tradicional</strong> (<code>usuario.nombre</code>): cuando solo necesitas <strong>una</strong> propiedad.</li>
+        <li><strong>Destructuración</strong>: cuando necesitas <strong>varias</strong> propiedades y vas a usarlas muchas veces.</li>
+      </ul>
+    </section>
+
+    <!-- SECCIÓN: Sacar todos los datos -->
+    <section>
+      <h2>¿Cómo sacar todos los datos del objeto?</h2>
+
+      <p>Si quieres sacar <strong>todas</strong> las propiedades, las pones <strong>todas</strong> entre las llaves, separadas por comas:</p>
+
+      <pre><code>const usuario = {
+  nombre: "Ana",
+  edad: 28,
+  pais: "España",
+  profesion: "Desarrolladora"
+};
+
+const { nombre, edad, pais, profesion } = usuario;
+
+console.log(nombre);     // "Ana"
+console.log(edad);       // 28
+console.log(pais);       // "España"
+console.log(profesion);  // "Desarrolladora"</code></pre>
+
+      <h3>Cosas importantes</h3>
+      <ol>
+        <li><strong>Tienes que poner el nombre de cada propiedad.</strong> Si te olvidas <code>pais</code>, no se crea la variable <code>pais</code>.</li>
+        <li><strong>El orden no importa</strong> en objetos: <code>const { nombre, edad, profesion } = usuario;</code> es igual que <code>const { profesion, nombre, edad } = usuario;</code></li>
+        <li><strong>No estás obligada a sacar todo.</strong> Solo sacas lo que necesites: <code>const { nombre, edad } = usuario;</code> está bien.</li>
+        <li><strong>El objeto <code>usuario</code> no desaparece.</strong> Sigues teniendo <code>usuario</code> completo.</li>
+      </ol>
+
+      <h3>Comparación rápida</h3>
+      <pre><code>// Tradicional — 4 líneas
+const nombre = usuario.nombre;
+const edad = usuario.edad;
+const pais = usuario.pais;
+const profesion = usuario.profesion;
+
+// Destructuración — 1 línea
+const { nombre, edad, pais, profesion } = usuario;</code></pre>
+      <p>Mismo resultado, menos repetición.</p>
+    </section>
+
+    <!-- CONCLUSIÓN -->
+    <section>
+      <h2>Conclusión</h2>
+
+      <div class="summary-box">
+        <p>La destructuración sirve sobre todo para:</p>
+        <ul>
+          <li><strong>Escribir menos código</strong></li>
+          <li><strong>Ponerlo en una línea</strong> (o en menos líneas)</li>
+          <li><strong>No repetir</strong> <code>usuario.</code> una y otra vez</li>
+        </ul>
+        <br>
+        <strong>Tu conclusión en una frase:</strong><br>
+        La destructuración es un atajo para sacar varios datos de un objeto (o array) y declarar varias variables de golpe, sin repetir tanto.
+      </div>
+    </section>
+
+    <footer>
+      Guía personal — Curso JavaScript · Destructuración
+    </footer>
+  </div>
+</body>
+</html>
