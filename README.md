@@ -1,28 +1,26 @@
 # Dashboard — 9 ejercicios
 
-Panel con 9 ejercicios de arrays de objetos y destructuración en JavaScript.
+Índice de nueve prácticas: arrays de objetos y destructuración.
 
 ## Qué hace
 
-- Sección “Arrays de objetos”: mes a letra, lista de compras, tareas
-- Sección “Destructuración”: perfil, podio, config, alias, e-commerce, rest…
-- Cada tarjeta abre la carpeta del ejercicio (`index.html` local)
+- Bloque de arrays (mes, compras, tareas)
+- Bloque de destructuración (perfil, podio, config, e-commerce…)
+- Cada tarjeta abre la carpeta del ejercicio
 
 ## Cómo probarlo
 
-Abre el `index.html` raíz o la demo; desde ahí entras a cada ejercicio.
+Empieza por el `index.html` raíz (o la demo) y entra a los que quieras.
 
 Demo: https://moussijoelle.github.io/dashboard-9-ejercicios/
 
 ## Cómo lo construí
 
-- HTML + Tailwind browser + DaisyUI (CDN)
-- Una carpeta por ejercicio con su propio HTML/JS
-- Tipografía Urbanist
+Una carpeta por ejercicio + portal con Tailwind/DaisyUI.
 
 ## Cómo verificarlo
 
-Sin tests. Abro el dashboard, entro a 2–3 ejercicios y miro que carguen.
+Abro tres ejercicios distintos y miro que cada uno cargue su propia página.
 
 ---
 
